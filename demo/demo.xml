@@ -1,0 +1,41 @@
+<odoo>
+    <data>
+
+        <record id="garantia_categoria_data" model="garantia.categoria">
+            <field name="name">Garantía básica</field>
+            <field name="description">Categoría de garantía básica</field>
+        </record>
+
+        <record id="garantia1" model="garantia.garantia">
+            <field name="descripcion">Garantía de producto A</field>
+            <field name="fecha_inicio">2022-01-01</field>
+            <field name="fecha_fin">2023-01-01</field>
+            <field name="categoria_id" ref="garantia_categoria_data"/>
+            <field name="cliente_id" ref="base.partner_admin"/>
+            <field name="venta_id" ref="sale.sale_order_1"/>
+            <field name="state">borrador</field>
+        </record>
+
+          <record id="garantia2" model="garantia.garantia">
+            <field name="descripcion">Garantía de producto B</field>
+            <field name="fecha_inicio">2022-01-01</field>
+            <field name="fecha_fin">2023-01-01</field>
+            <field name="categoria_id" ref="garantia_categoria_data"/>
+            <field name="cliente_id" ref="base.partner_admin"/>
+            <field name="venta_id" ref="sale.sale_order_1"/>
+            <field name="state">enProceso</field>
+        </record>
+
+         <record id="garantia3" model="garantia.garantia">
+            <field name="descripcion">Garantía de producto C</field>
+            <field name="fecha_inicio">2022-01-01</field>
+            <field name="fecha_fin">2023-01-01</field>
+            <field name="categoria_id" ref="garantia_categoria_data"/>
+            <field name="cliente_id" ref="base.partner_admin"/>
+            <field name="venta_id" ref="sale.sale_order_1"/>
+            <field name="state">enProceso</field>
+        </record>
+
+
+    </data>
+</odoo>

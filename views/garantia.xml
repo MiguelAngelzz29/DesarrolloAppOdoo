@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id='garantia_action' model='ir.actions.act_window'>
+        <field name="name">Garantias</field>
+        <field name="res_model">garantia.garantia</field>
+        <field name="view_mode">kanban,tree,form,calendar</field>
+    </record>
+
+    <record id='garantia_calendar_action' model='ir.actions.act_window'>
+        <field name="name">Garantías</field>
+        <field name="res_model">garantia.garantia</field>
+        <field name="view_mode">calendar</field>
+    </record>
+
+    <menuitem name="Gestión Garantías" id="garantia_base_menu" />
+     <menuitem name="Garantía" id="garantia_menu" parent="garantia_base_menu" action="garantia_action"/>
+     <menuitem name="Calendario" id="garantia_menu_calendar" parent="garantia_base_menu" action="garantia_calendar_action"/>
+    
+       <!-- Calendar View -->
+    <record id="garantia_view_calendar" model="ir.ui.view">
+        <field name="name">Calendario Garantias</field>
+        <field name="model">garantia.garantia</field>
+        <field name="arch" type="xml">
+            <calendar string="Release Calendar" date_start="fecha_inicio" date_stop="fecha_fin" mode="month">
+                <field name="descripcion"/>
+            </calendar>
+        </field>
+    </record>
+
+      <!-- Kanban View -->
+    <record id="garantia_view_kanban" model="ir.ui.view">
+        <field name="name">Garantia Kanban</field>
+        <field name="model">garantia.garantia</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state">
+                <field name="state" />
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="oe_kanban_content">
+                                <div class="oe_kanban_card">
+                                    <div>
+                                        <i class="fa fa-tag"/>
+                                        <b>
+                                            <field name="categoria_id" />
+                                        </b>
+                                    </div>
+                                    <div class="text-muted">
+                                        <i class="fa fa-book"/>
+                                        <field name="descripcion" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>    
+    <!-- Form View -->
+    <record id="garantia_view_form" model="ir.ui.view">
+        <field name="name">Garantía Form</field>
+        <field name="model">garantia.garantia</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="make_EnProceso" string="En Proceso" type="object"/>
+                    <button name="make_enRevision"  string="En Revisión" type="object"/>
+                    <button name="make_Terminada"  string="Terminada" type="object"/>
+                    <!-- <button name="log_all_library_members"  string="Log Members" type="object"/>
+                    <button name="create_categories" string="Create Categories" type="object"/>
+                    <button name="change_release_date" string="Update Date" type="object"/>
+                    <button name="find_book" string="Find Book" type="object"/> -->
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <group>
+                    <group>
+                        <field name="descripcion"/>
+                        <field name="productos_ids" widget="many2many_tags"/> 
+                        <field name="venta_id"/>
+                        <field name="cliente_id"/>
+                        <field name="categoria_id"/>
+                    </group>
+                    <group>
+                        <field name="fecha_inicio"/>
+                        <field name="fecha_fin"/>
+                        
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="garantia_view_tree" model="ir.ui.view">
+        <field name="name">Garantía List</field>
+        <field name="model">garantia.garantia</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="descripcion"/>
+                <field name="fecha_inicio"/>
+                <field name="fecha_fin"/>
+                <field name="cliente_id"/>
+                <field name="productos_ids"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="garantia_view_search" model="ir.ui.view">
+        <field name="name">Garantía Search</field>
+        <field name="model">garantia.garantia</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="descripcion"/>
+                <field name="cliente_id"/>
+                <field name="productos_ids"/> 
+                <filter string="Garantías en revisión" name="estado" domain="[('state','=','enRevision')]"/>
+                <filter string="Garantías en proceso" name="estado" domain="[('state','=','EnProceso')]"/>
+                <filter string="Garantías en tramitada" name="estado" domain="[('state','=','Tramitada')]"/>
+                <filter string="Garantías en terminada" name="estado" domain="[('state','=','Terminada')]"/>
+            </search>
+        </field>
+    </record>
+
+</odoo>

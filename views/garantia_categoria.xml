@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id='garantia_categoria_action' model='ir.actions.act_window'>
+        <field name="name">Tipos Garantías</field>
+        <field name="res_model">garantia.categoria</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Tipos Garantías" id="tipos_garantia_menu" parent="garantia_base_menu" action="garantia_categoria_action"/>
+   
+    
+    <!-- Form View -->
+    <record id="garantia_categoria_view_form" model="ir.ui.view">
+        <field name="name">Categoria Garantías Form</field>
+        <field name="model">garantia.categoria</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="descripcion"/>
+                        <field name="name"/>
+                         <field name="child_ids"/>
+                        
+                    </group>
+                    <group>
+                        <field name="fecha_inicio"/>
+                        <field name="fecha_fin"/>
+                    </group>
+                </group>
+            </form>
+        </field>    
+    </record>    
+
+     <!-- Tree(list) View -->
+    <record id="garantia_categoria_view_tree" model="ir.ui.view">
+        <field name="name">Garantías List</field>
+        <field name="model">garantia.categoria</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="descripcion"/>
+            </tree>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <report
+      id="report_garantia"
+      model="garantia.garantia"
+      string="Garantía"
+      report_type="qweb-pdf"
+      name="garantia.garantia_report"
+    />
+
+    <template id="garantia_report">
+      <t t-call="report.html_container">
+        <t t-foreach="docs" t-as="doc">
+          <t t-call="report.internal_layout">
+            <div class="page">
+              <div class="o_report_layout">
+                <h2>Reporte de Garantía</h2>
+                <table class="table table-condensed">
+                  <tr>
+                    <td><strong>Descripción:</strong></td>
+                    <td><span t-esc="doc.descripcion"/></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Fecha Inicio:</strong></td>
+                    <td><span t-esc="doc.fecha_inicio"/></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Fecha Fin:</strong></td>
+                    <td><span t-esc="doc.fecha_fin"/></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Categoría:</strong></td>
+                    <td><span t-esc="doc.categoria_id.name"/></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Cliente:</strong></td>
+                    <td><span t-esc="doc.cliente_id.name"/></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Productos:</strong></td>
+                    <td>
+                      <t t-foreach="doc.productos_ids" t-as="product">
+                        <p><span t-esc="product.name"/></p>
+                      </t>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Estado:</strong></td>
+                    <td><span t-esc="doc.state"/></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </t>
+        </t>
+      </t>
+    </template>
+
+  </data>
+</odoo>
